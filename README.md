@@ -10,7 +10,7 @@ Small puzzle game written in C targeting native Linux and the web (HTML5/WASM/Ja
 * GCC
 * SDL2
 
-Compile
+Build
 ```
 make linux
 ```
@@ -24,7 +24,7 @@ Enjoy
 ### Prerequisites
 * Emscripten
 
-Compile
+Build
 ```
 $ make web
 ```

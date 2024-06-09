@@ -6,8 +6,8 @@ linux: gravi
 
 gravi.js: game.c
 	emcc -o $@ -s EXPORTED_FUNCTIONS="['_malloc','_game_create','_game_update']" -s EXPORTED_RUNTIME_METHODS="['ccall','cwrap']" $^
-	wc -l gravi.js
-	wc -l gravi.wasm
+	@wc -l gravi.js
+	@wc -l gravi.wasm
 
 gravi.tar: gravi.js gravi.html gravi.wasm
 	tar -cf $@ $^
