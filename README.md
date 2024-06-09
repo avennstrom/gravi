@@ -10,8 +10,12 @@ Small puzzle game written in C targeting native Linux and the web (HTML5/WASM/Ja
 * GCC
 * SDL2
 
+Compile
 ```
 make linux
+```
+Enjoy
+```
 ./gravi
 ```
 
@@ -20,12 +24,12 @@ make linux
 ### Prerequisites
 * Emscripten
 
+Compile
 ```
-make web
+$ make web
 ```
-
 Run the test server
 ```
-./serve.py
+$ ./serve.py
 ```
 Navigate to http://localhost:8000/gravi.html
