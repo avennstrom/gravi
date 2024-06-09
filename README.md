@@ -1,6 +1,6 @@
 # Gravi
 
-Small puzzle game written in C targeting native Linux and the web (HTML5/WASM/JavaScript).
+Small puzzle game written in C targeting Linux and the web (HTML5/WASM/JavaScript).
 
 ![Screenshot](docs/screenshot.png)
 
