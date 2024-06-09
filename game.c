@@ -403,15 +403,6 @@ void draw_game(game_t* game, draw_t* draws, int* drawcount)
 	for (int i = 0; i < game->object_count[OBJECT_PLAYER]; ++i)
 	{
 		const object_t* player = &game->objects[i + game->object_start[OBJECT_PLAYER]];
-		// SDL_SetRenderDrawColor(renderer, 0x00, 0xff, 0x00, 0xff);
-		// const SDL_Rect rect = { 
-		// 	(player->x + player->vx*t) * TILESIZE,
-		// 	(player->y + player->vy*t) * TILESIZE,
-		// 	TILESIZE,
-		// 	TILESIZE,
-		// };
-		// SDL_RenderFillRect(renderer, &rect);
-
 		*append_draw(&cb) = (draw_t){ 
 			(player->x + player->vx*t) * TILESIZE, 
 			(player->y + player->vy*t) * TILESIZE, 
@@ -440,12 +431,11 @@ void draw_game(game_t* game, draw_t* draws, int* drawcount)
 game_t*	game_create(void)
 {
 	game_t* game = malloc(sizeof(game_t));
+	assert(game != NULL);
 	memset(game, 0, sizeof(game_t));
 
 	game->level_index = 0;
 	reload_level(game);
-
-	printf("hello from game\n");
 
 	return game;
 }
