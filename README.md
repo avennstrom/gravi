@@ -1,16 +1,17 @@
 # Gravi
 
-Small puzzle game written in C. 
+Small puzzle game written in C targeting native Linux and the web (HTML5/WASM/JavaScript).
 
 # Building
 
 ## Linux
 
 ### Prerequisites
+* GCC
 * SDL2
 
 ```
-$ make linux
+make linux
 ```
 
 ## Web
@@ -19,10 +20,10 @@ $ make linux
 * Emscripten
 
 ```
-$ make web
+make web
 ```
 
 ### Run test server
 ```
-$ ./serve.py
+./serve.py
 ```
