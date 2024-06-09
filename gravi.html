@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gravi</title>
+	<style>
+		body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #111; /* Optional: Set a background color */
+        }
+        canvas {
+            border: 1px solid black; /* Optional: Add a border to the canvas */
+        }
+	</style>
+</head>
+<body>
+	<canvas id="gameview" width="480" height="480"></canvas>
+    <script>
+		const TILESIZE = 32;
+		const TILECOUNT = 15;
+		const RESOLUTION = (TILESIZE * TILECOUNT);
+		const DRAWBUF_SIZE = 4 * 1024;
+		const DRAWBUF_STRIDE = 20;
+
+        var Module = {
+            onRuntimeInitialized: function() {
+                var drawbuf = Module._malloc(DRAWBUF_SIZE);
+				var drawcountbuf = Module._malloc(4);
+				console.assert(drawbuf);
+				console.assert(drawcountbuf);
+
+                var game_create = Module.cwrap('game_create', 'number', []);
+				var game_update = Module.cwrap('game_update', null, ['number','number','number','number','number']);
+
+                var game = game_create();
+				console.assert(game);
+
+				var drawcountView = new Int32Array(Module.HEAP32.buffer, drawcountbuf, 1);
+				var drawbufView = new DataView(Module.HEAPU8.buffer, drawbuf, DRAWBUF_SIZE);
+
+				/** @type {HTMLCanvasElement} */
+				const canvas = document.getElementById('gameview');
+				const ctx = canvas.getContext('2d');
+
+				let game_input = 0;
+				
+				window.addEventListener('keydown', (ev) => {
+					//console.log(ev.key);
+					if (ev.key === 'w' || ev.key === 'W' || ev.key === 'ArrowUp')		{ game_input = 1; }
+					if (ev.key === 's' || ev.key === 'S' || ev.key === 'ArrowDown')		{ game_input = 2; }
+					if (ev.key === 'a' || ev.key === 'A' || ev.key === 'ArrowLeft')		{ game_input = 3; }
+					if (ev.key === 'd' || ev.key === 'D' || ev.key === 'ArrowRight')	{ game_input = 4; }
+				});
+
+				const frame = (time) => {
+					window.requestAnimationFrame(frame);
+
+					game_update(game, time, game_input, drawbuf, drawcountbuf);
+					game_input = 0;
+
+					let drawCount = drawcountView[0];
+					//console.log({drawCount});
+
+					ctx.fillStyle = 'black';
+					ctx.fillRect(0, 0, RESOLUTION, RESOLUTION);
+
+					for (let i = 0; i < drawCount; ++i)
+					{
+						const x = drawbufView.getInt32(i*DRAWBUF_STRIDE + 0, true);
+						const y = drawbufView.getInt32(i*DRAWBUF_STRIDE + 4, true);
+						const w = drawbufView.getInt32(i*DRAWBUF_STRIDE + 8, true);
+						const h = drawbufView.getInt32(i*DRAWBUF_STRIDE + 12, true);
+						const color = drawbufView.getUint32(i*DRAWBUF_STRIDE + 16, true);
+						
+						//console.log({x,y,w,h,color});
+
+						ctx.fillStyle = '#' + color.toString(16).padStart(8, '0');
+						ctx.fillRect(x, y, w, h);
+					}
+				}
+
+				window.requestAnimationFrame(frame);
+            }
+        };
+    </script>
+    <script src="./gravi.js"></script>
+</body>
+</html>
