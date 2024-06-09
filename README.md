@@ -15,11 +15,11 @@ Small puzzle game written in C targeting Linux and the web (HTML5/WASM/JavaScrip
 
 Build
 ```
-make linux
+$ make linux
 ```
 Enjoy
 ```
-./gravi
+$ ./gravi
 ```
 
 ## Web
