@@ -12,6 +12,7 @@ Small puzzle game written in C targeting native Linux and the web (HTML5/WASM/Ja
 
 ```
 make linux
+./gravi
 ```
 
 ## Web
@@ -23,7 +24,8 @@ make linux
 make web
 ```
 
-### Run test server
+Run the test server
 ```
 ./serve.py
 ```
+Navigate to http://localhost:8000/gravi.html
