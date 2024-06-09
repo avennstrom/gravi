@@ -9,6 +9,7 @@ Small puzzle game written in C targeting Linux and the web (HTML5/WASM/JavaScrip
 ## Linux
 
 ### Prerequisites
+* GNU Make
 * GCC
 * SDL2
 
@@ -24,6 +25,7 @@ Enjoy
 ## Web
 
 ### Prerequisites
+* GNU Make
 * Emscripten
 
 Build
