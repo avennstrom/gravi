@@ -133,7 +133,6 @@ typedef struct object
 {
 	int x, y;
 	int vx, vy;
-	//int ax, ay;
 } object_t;
 
 enum
