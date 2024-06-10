@@ -9,6 +9,7 @@ Small puzzle game written in C targeting Linux and the web (HTML5/WASM/JavaScrip
 ## Linux
 
 ### Prerequisites
+* GNU Make
 * GCC
 * SDL2
 
@@ -24,6 +25,7 @@ $ ./gravi
 ## Web
 
 ### Prerequisites
+* GNU Make
 * Emscripten
 * Python 3 (for running test server)
 
